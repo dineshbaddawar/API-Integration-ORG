@@ -1,0 +1,124 @@
+<apex:page standardController="Account" renderAs="PDF"  extensions="RenderAsPDFController" applyHtmlTag="false" standardStylesheets="false" showHeader="false" >
+    <html>
+        <head>
+            
+            <style type="text/css">
+                @page {
+                padding-left: 5px;    
+                padding-right: 5px;      
+                }
+                
+                th {  
+                font-weight: bold;
+                text-align: center;
+                color: black;
+                padding: 8px;
+                }
+                
+                td {    
+                font-size: 15px;
+                text-align: left;
+                padding: 8px;
+                }
+                
+                table{
+                border-collapse: collapse;
+                }
+                
+                table, th, td {
+                border: 1px solid black;
+                }
+                
+                
+                
+                .left {
+                position: fixed;
+                left: 0;
+                }
+                
+                .right {
+                position: fixed;
+                right: 0;
+                }
+                
+                .Address{
+                float: right;
+                font-size: 13px;
+                text-align:left;
+                }
+                .nikhil{
+                font-size: : 12px;
+                text-transform:uppercase;
+                }
+                
+                .h {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                }
+                
+                td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+                }
+                
+                tr:nth-child(even) {
+                background-color: #dddddd;
+                }
+                
+                
+            </style>
+            <script type = "text/javascript">
+            
+            </script>
+        </head>
+        
+        <table style="width:100%; font-family: Dialog; table-layout: fixed;">                    
+            <tr >
+                <td style="width:50%; font-size: 12px; height:78px;"><b>Account Name </b> <br/></td>
+                <td style="width:80%; font-size: 12px;"><b>Email</b> <br/></td>
+                <td style="width:50%; font-size: 12px; height:50px;"><b>Opportunity Name </b> <br/></td>
+                <td style="width:80%; font-size: 12px;"><b>Email</b> <br/></td>
+            </tr> 
+            
+        </table>
+        
+        <table style="width:100%; table-layout: fixed;">
+            <tr>
+                <td style="width:50%;">{!AccountName}</td>
+                <td style="width:80%;">{!AccountEmail}</td>
+                <td style="width:50%;">{!oppName}</td>
+                <td style="width:80%;">{!oppEmail}</td>
+            </tr>
+            
+        </table>
+        <br/>
+        
+          <p classs="slds-m-around_medium">
+               <b>Lead Record Related Opportunity</b> 
+            </p>
+        <table class="h">
+          
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>AnnualRevenue</th>
+            </tr>
+            
+            <td>
+                <apex:repeat value="{!leadData}" var="item" >
+                    <tr>
+                        <td>{!item.Name}</td>
+                        <td>{!item.Email}</td>
+                        <td>{!item.AnnualRevenue}</td>
+                    </tr>
+                </apex:repeat>
+                
+            </td>
+        </table>
+        
+        
+    </html>
+    
+</apex:page>

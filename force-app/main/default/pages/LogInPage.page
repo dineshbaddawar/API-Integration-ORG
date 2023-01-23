@@ -1,0 +1,135 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" controller="LoginController">
+    <html>
+        <head>
+            
+            
+            
+            <c:Libraries ></c:Libraries>
+           
+            <style>
+                body {
+                background: rgb(93, 186, 248);
+                }
+                
+                .btn-login {
+                font-size: 0.9rem;
+                letter-spacing: 0.05rem;
+                padding: 0.75rem 1rem;
+                }
+                
+                .loadingBackground {
+                position: fixed;
+                height: auto;
+                width: auto;
+                background: #6ab4f8;
+                z-index: 11111;
+                opacity: 0.7;
+                top: 0px;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                }
+                
+                .loading {
+                top: 50%;
+                left: 50%;
+                margin: -50px 0px 0px -50px;
+                z-index: 111111;
+                position: fixed;
+                }
+            </style>
+            
+            
+            <Script>
+                var stieURL = "{!$Label.LoginSiteURL}";
+                var app = angular.module('app', []);
+                app.controller('formController', function ($scope) {
+                
+                
+                $scope.userName;
+                $scope.userPassword;
+                $scope.loginPage = true;
+                
+                $scope.loginUser = function(){
+                debugger;
+               
+                LoginController.loginUser($scope.userName, $scope.userPassword, function(result, event){
+                if(event.status && result !=null){
+              
+                debugger;
+                Swal.fire(
+                '', 'Logged In Successfully', 'Success'
+                )
+                $scope.$apply();
+                debugger;
+                var sitePrefix = window.location.href.includes('/apex') ? '/apex' : '/Reviewer';
+                 window.location.replace(window.location.origin +sitePrefix+"/ReviewerPortal?id="+result+"#/ReviewerHome"); 
+                <!--  window.location.replace(stieURL + "ReviewerPortal?id=" + result + '#/ReviewerHome');  -->               
+                }else{
+                Swal.fire({
+                icon: 'error',
+                title: 'Opps....!',
+                text: 'Please Enter the Correct Username & Password !'
+                })
+                }
+                
+                
+                }, { escape: false })
+                $scope.$apply();
+                }
+                });
+            </Script>
+        </head>
+        <body ng-app="app" ng-controller="formController">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(41, 140, 233) !important;font-size: 14px;">
+                <div class="container-fluid justify-content-center" >
+                    <a class="navbar-brand ">
+                        <apex:image url="{!$Resource.SiteLogo}" styleClass="logo" width="20%" height="10%" />
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="container d-flex justify-content-center">
+                <div class="card h-100 col-sm-8" style="border-radius:30px;">
+                    
+                    <div class="row">
+                        <div class="col-sm-12 slds-p-around_small p-5">
+                            <div class="row" >
+                                <h2 class="text-center"><u style="text-decoration-color:Darkorange; ">LOGIN</u></h2>
+                            </div>
+                            <div class="row" >
+                                <h6 class="text-center">
+                                    <b style="font-family: -webkit-body; color:rgb(43, 56, 65)">Welcome To Dinesh Hub Portal</b>
+                                </h6>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-12 p-2">
+                                    <label for="floatingInputUsername" style="text: 2px solid LightBlue;">Username</label>
+                                    <input type="text" class="form-control" placeholder="username" ng-model="userName" style="border: 2px solid LightBlue;" />
+                                </div>
+                                
+                                
+                                <div class="col-md-12 p-2" >
+                                    <label for="floatingPassword" style="text: 2px solid LightBlue;">Password</label>
+                                    <input type="password" class="form-control" placeholder="Password" ng-model="userPassword" style="border: 2px solid LightBlue;" />
+                                </div>
+                                
+                                <div class="col-sm-12 p-2">
+                                    <a href="#" style="color:rgb(117, 147, 245); margin-top: 1%;" ng-click="forgotpass()">Forgot password?</a>
+                                </div>
+                                
+                                
+                                
+                                
+                                <div class="col-sm-12 p-2" >
+                                    <button class="btn btn-lg btn-dark btn-login fw-bold text-uppercase col-sm-12" type="submit" ng-click="loginUser()">Login</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

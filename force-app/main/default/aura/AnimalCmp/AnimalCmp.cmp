@@ -1,0 +1,18 @@
+<aura:component controller="Animals" implements="flexipage:availableForAllPageTypes">
+    <!-- attributes -->
+    <aura:attribute name="data" type="List"/>
+    
+    <lightning:card title="Named Credentials - Basic Implementation">
+        <div class="slds-p-left_x-small">
+            <lightning:button label="Get Animals from External System" onclick="{!c.getAnimals}" /> <br/><br/>
+        
+            <!-- Display list of Animals -->
+            <p style="font-weight:bold">List of Animals:</p>
+            <ul class="slds-list_dotted">
+                <aura:iteration items="{!v.data}" var="animal">
+                    <li>{!animal}</li>
+                </aura:iteration>
+            </ul>
+        </div>
+    </lightning:card>
+</aura:component>
