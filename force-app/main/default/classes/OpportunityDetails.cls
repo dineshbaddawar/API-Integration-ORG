@@ -1,3 +1,4 @@
+// Wrapper class for Inserting Opportunity usin REST API
 public class OpportunityDetails {
 
     public String Name;

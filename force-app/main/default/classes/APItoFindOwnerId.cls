@@ -1,3 +1,4 @@
+// Fiding Lead Record and OwnerId by Sending Phone as JSON Body
 @RestResource(urlMapping='/findLeadOwnerId/*')
 global class APItoFindOwnerId {
     @HttpPost
@@ -33,7 +34,7 @@ global class APItoFindOwnerId {
                 responseJSON.success = false;
             }
         }catch(Exception e){
-            System.debug('The Error Message is : '+e.getMessage());
+          HandleException.CreateErrorMsg('APItoFindOwnerId', 'findOwnerId', e);
         }
         return responseJSON;
     }
@@ -44,4 +45,11 @@ global class APItoFindOwnerId {
         global String Leadid;
         global boolean success;
     }
+    
+    /*
+   
+{
+"Phone": "9098909890988"
+}
+     */
 }

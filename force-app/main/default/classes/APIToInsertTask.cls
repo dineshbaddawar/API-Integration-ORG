@@ -1,7 +1,8 @@
+// API For Creating Task Record By using JSON Body
 @RestResource(urlMapping='/APIToInsertTask/*')
 global class APIToInsertTask {
     @httpPost
-    global static responseWrapper TaskCreate(){
+    global static responseWrapper TaskCreateAPI(){
         
         responseWrapper responseJSON = new responseWrapper();
         try{
@@ -22,7 +23,7 @@ global class APIToInsertTask {
                 responseJSON.Message = 'Task Creation Failed';
             }
         }catch(Exception e){
-            System.debug('Error is occured '+e.getMessage());
+            HandleException.CreateErrorMsg('APIToInsertTask', 'TaskCreateAPI', e);
             responseJSON.Message= e.getMessage();
         }
         return responseJSON;

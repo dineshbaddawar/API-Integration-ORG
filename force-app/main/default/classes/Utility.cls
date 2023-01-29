@@ -8,8 +8,8 @@ public class Utility {
         
         EmailTemplate et=[Select id, Name, DeveloperName, Subject, Body, HtmlValue from EmailTemplate where Name = 'Reset Password Link	'];
         recipients.add(conList[0].Email);
-         mail.setToAddresses(recipients);
-         mail.setSenderDisplayName('Ondonte');
+        mail.setToAddresses(recipients);
+        mail.setSenderDisplayName('Ondonte');
     }
     
     public static String generateRandomString(){
@@ -42,5 +42,36 @@ public class Utility {
             System.debug('Contacts Name :::'+con.Name);
         }
         return conList;
+    }
+    
+    // =============================================================================================================================================================
+    
+    public Static Contact getUpdateContactList(String firstName){
+        try{
+            Contact con = new Contact();
+            con.FirstName = firstName;
+            insert con;
+            return con;
+        }catch(Exception e){
+            System.debug('Error ::'+e.getMessage());
+            HandleException.CreateErrorMsg('Utility', 'getUpdateContactList', e);
+        }
+        return null;
+    }
+    
+    // =============================================================================================================================================================
+    // Used in Aura Comp
+    @AuraEnabled
+    public static String fetchAnimals(){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        
+        request.setEndpoint('callout:AnimalCreds');
+        request.setMethod('GET');        
+        HttpResponse response = http.send(request);
+        if (response.getStatusCode() == 200) {
+            return response.getBody();
+        }
+        return null;
     }
 }

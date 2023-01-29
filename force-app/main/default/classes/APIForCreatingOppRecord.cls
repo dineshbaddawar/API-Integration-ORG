@@ -25,7 +25,7 @@ global class APIForCreatingOppRecord {
             responseJSON.Message = 'Opportunity Record Created Successfully';
             responseJSON.OppId = opp.Id;
         }catch(Exception e){
-            System.debug('The Error : '+e.getMessage() + 'AND Error Line :'+e.getLineNumber());
+            HandleException.CreateErrorMsg('Utility', 'getUpdateContactList', e);
             responseJSON.Message = e.getMessage();
         }
         return responseJSON;
@@ -39,13 +39,13 @@ global class APIForCreatingOppRecord {
 
 /*
 {
-    "OppAccountId": "0015i00000P00MqAAJ",
-    "Name": "Ajeet Kumar",
+    "OppAccountId": "0015i00000Td71gAAB",
+    "Name": "Republic Day",
     "OppNextStep": "Completed",
     "Opptype": "New Customer",
     "OppProbality": 99,
     "OppStage": "Prospect",
-    "OppcloseDate": "2018-08-01",
+    "OppcloseDate": "2023-01-26",
     "OppleadSource": "Web",
     "OppEmail": "dinesh@gmail.com",
     "OppUrl": "salesforce.com",

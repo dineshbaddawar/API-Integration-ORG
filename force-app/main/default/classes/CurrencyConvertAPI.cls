@@ -11,9 +11,9 @@ public class CurrencyConvertAPI {
             if(opp.Amount !=null){
                CurrencyConvertAPI.currecncyConvertAPI(opp.Amount,opp.Id); 
             }
-            return null;
+            return opp;
         }catch(Exception e){
-            System.debug('Error  ::'+e.getMessage() + ' && Line No '+e.getLineNumber());
+             HandleException.CreateErrorMsg('CurrencyConvertAPI', 'oppAmountINRtoUSD', e);
         }
         return null;
     }
@@ -47,7 +47,7 @@ public class CurrencyConvertAPI {
                 system.debug('opp update Record ::'+opp);
             }
         }catch(Exception e){
-            System.debug('Error ::'+e.getMessage() + ' && Line No ::'+e.getLineNumber());
+            HandleException.CreateErrorMsg('CurrencyConvertAPI', 'currecncyConvertAPI', e);
         }
         
     }

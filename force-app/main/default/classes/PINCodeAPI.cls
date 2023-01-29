@@ -12,23 +12,23 @@ public class PINCodeAPI {
             System.debug('con Record API ::'+con);
             String Pincode = con.MailingPostalCode;
             if(Pincode !=null && con.Id !=null){
-                PINCodeAPI.getPhoneResponse(Pincode,con.Id);
+                PINCodeAPI.getPineCodeResponse(Pincode,con.Id);
             }
             return con;
         }catch(Exception e){
-            System.debug('Error ::'+e.getLineNumber() + ' && Line ::'+e.getMessage());
+           HandleException.CreateErrorMsg('PINCodeAPI', 'afterInsertContactPindCode', e);
         }
         return null;
     } 
     
     @future (callout=true)
-    public Static void getPhoneResponse(String Pincode, String conId){
+    public Static void getPineCodeResponse(String Pincode, String conId){
         System.debug('Pincode  API:: '+Pincode + '&& conId  API::: '+conId);
         try{
             // URL : https://api.postalpincode.in/pincode/431809 --> PINCODe
             // URL : https://api.postalpincode.in/postoffice/Dharmabad  --> POSTOFFICE
-            List<PhoneResponseWrapper> wrapList = new List<PhoneResponseWrapper>();
-            PhoneResponseWrapper wrap = new PhoneResponseWrapper();
+            List<PinCodeResponseWrapper> wrapList = new List<PinCodeResponseWrapper>();
+            PinCodeResponseWrapper wrap = new PinCodeResponseWrapper();
             String endpoint = 'https://api.postalpincode.in/pincode/'+Pincode;
             System.debug('endpoint ::'+endpoint);
             Http http = new Http();
@@ -74,7 +74,7 @@ public class PINCodeAPI {
                 system.debug('insert PO Record Size :::'+postList.size());
             }
         }catch(Exception e){
-            System.debug('Error ::'+e.getLineNumber() + ' && Line ::'+e.getMessage());
+            HandleException.CreateErrorMsg('PINCodeAPI', 'getPineCodeResponse', e);
         }
     }
     

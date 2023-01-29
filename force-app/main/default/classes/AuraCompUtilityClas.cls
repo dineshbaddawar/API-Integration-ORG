@@ -148,7 +148,7 @@ public class AuraCompUtilityClas {
     // Calss 1
     @AuraEnabled
     Public Static List<Opportunity> getOpportunity(){
-        return [SELECT Id,Name,StageName,Amount, CloseDate FROM Opportunity WHERE CreatedDate = THIS_WEEK  LIMIT 10];
+        return [SELECT Id,Name,StageName,Amount, CloseDate FROM Opportunity order by createdDate DESC  LIMIT 10];
     }
     
     // Class 2

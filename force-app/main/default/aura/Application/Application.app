@@ -7,5 +7,6 @@
     <!--  <c:WrapperAuraComp/> -->
      <!--  <c:AccountWithRelatedContactUsingSOQL/> -->
      <!--  <c:PasswordAuraComp/> -->
-    <c:getPickListValuesAuraComp/>
+    <!--c:getPickListValuesAuraComp/> -->
+    <c:AnimalCmp/>
 </aura:application>

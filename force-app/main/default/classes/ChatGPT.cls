@@ -1,6 +1,7 @@
 public with sharing class ChatGPT {
    //private static String CHAT_GPT_KEY = ChatGPTKey__c.getValues('keyValue').APIkey__c;
-    private static final String ENDPOINT ='https://api.openai.com/v1/completions';
+   // private static final String ENDPOINT ='https://api.openai.com/v1/completions';
+    public static final String BaseEndURL = Label.ChatGptEndPointURL;
 
     @AuraEnabled
     public static String getChatGPTResult(String searchString){
@@ -12,11 +13,11 @@ public with sharing class ChatGPT {
                 +seachQueryEscaped+
                 '","max_tokens": 4000,"temperature": 0,'
                 +'"stream": false,"top_p": 0.5}';
-            System.debug('Query '+seachQueryEscaped+' '+reqBody);
+            System.debug('Query---> '+seachQueryEscaped+' && Request Body --> '+reqBody);
             HttpRequest request = new HttpRequest();
-            request.setEndpoint(ENDPOINT);
+            request.setEndpoint(BaseEndURL);
             request.setMethod('POST');
-            request.setHeader('Authorization', 'Bearer '+String.escapeSingleQuotes('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').trim());
+            request.setHeader('Authorization', 'Bearer '+String.escapeSingleQuotes(Label.chatgptApiKey).trim());
             //Setting timeout to max 120 second to get whole response from Chat GPT Open API
             request.setTimeout(120000);
             request.setHeader('Content-Type', 'application/json;charset=UTF-8');
@@ -36,8 +37,7 @@ public with sharing class ChatGPT {
             return response.getbody();
 
         }catch(Exception ex){
-            System.debug('Exception in Catch of Server-Side Controller ::'+ex.getCause());
-            System.debug('Error Line ::'+ex.getLineNumber());
+          HandleException.CreateErrorMsg('ChatGPT', 'getChatGPTResult', ex);
             throw new AuraHandledException(ex.getMessage());
         }
     }
